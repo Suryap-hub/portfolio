@@ -105,6 +105,38 @@ def test_show_about_card():
     assert card["nickname"] == "Surya" and card["tags"]
 
 
+def test_certifications_card_has_verify_links_and_images():
+    card, result = run_tool("show_certifications", "{}", PROFILE)
+    assert card["type"] == "certifications"
+    certs = card["certifications"]
+    assert certs[0]["featured"]  # featured ones first
+    for c in certs:
+        assert c["name"] and c["issuer"] and c["date"]
+        assert c["verifyUrl"].startswith("https://")
+        assert c["image"]
+    assert "AWS Certified Cloud Practitioner" in result
+
+
+def test_certificate_images_exist():
+    from pathlib import Path
+    public = Path(__file__).resolve().parents[2] / "frontend" / "public"
+    for c in PROFILE["certifications"]:
+        for key in ("image", "thumb"):
+            if c.get(key, "").startswith("/"):
+                assert (public / c[key].lstrip("/")).is_file(), c[key]
+    for v in PROFILE.get("volunteering", []):
+        for photo in v.get("photos", []):
+            assert (public / photo["src"].lstrip("/")).is_file(), photo["src"]
+
+
+def test_volunteering_card_and_knowledge():
+    card, result = run_tool("show_volunteering", "{}", PROFILE)
+    assert card["type"] == "volunteering" and card["volunteering"][0]["id"] == "nss"
+    assert "NSS" in result
+    text_ = profile_as_text(PROFILE)
+    assert "CERTIFICATIONS:" in text_ and "VOLUNTEERING" in text_
+
+
 def test_unknown_tool():
     card, result = run_tool("delete_everything", "{}", PROFILE)
     assert card is None and "Unknown tool" in result

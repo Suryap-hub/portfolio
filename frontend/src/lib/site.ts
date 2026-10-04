@@ -22,10 +22,18 @@ export const site = {
   repo: "",
 };
 
-export type QuickKey = "me" | "projects" | "skills" | "experience" | "contact";
+export type QuickKey = "me" | "projects" | "skills" | "experience" | "certs" | "contact";
 
 /** Which card a quick button shows straight away (no need for the AI to pick one). */
-export type Intent = "about" | "projects" | "skills" | "experience" | "contact" | "resume";
+export type Intent =
+  | "about"
+  | "projects"
+  | "skills"
+  | "experience"
+  | "contact"
+  | "resume"
+  | "certifications"
+  | "volunteering";
 
 /** The quick buttons under the input. */
 export const quickQuestions: { key: QuickKey; label: string; question: string; intent: Intent }[] = [
@@ -38,12 +46,15 @@ export const quickQuestions: { key: QuickKey; label: string; question: string; i
     question: "Tell me about your experience and education.",
     intent: "experience",
   },
+  { key: "certs", label: "Certs", question: "What certifications do you have?", intent: "certifications" },
   { key: "contact", label: "Contact", question: "How can I contact you?", intent: "contact" },
 ];
 
 /** Extra questions in the "More" menu. */
 export const moreQuestions: { question: string; intent?: Intent }[] = [
   { question: "Can I see your resume?", intent: "resume" },
+  { question: "What volunteering have you done with NSS?", intent: "volunteering" },
+  { question: "Are you AWS certified?" },
   { question: "How did you prevent double spending in your FinTech system?" },
   { question: "What is Gita Mentor AI and how does it work?" },
   { question: "Are you open to internships?" },

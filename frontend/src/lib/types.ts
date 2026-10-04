@@ -39,6 +39,35 @@ export type ExperienceData = {
 
 export type ContactData = { email: string; linkedin: string; github: string; location: string };
 
+export type Certification = {
+  id: string;
+  name: string;
+  issuer: string;
+  kind: string;
+  date: string;
+  expires?: string;
+  details?: string;
+  /** Full-size image: a certificate scan, or a square badge. */
+  image: string;
+  /** Smaller version for the grid (optional; falls back to image). */
+  thumb?: string;
+  imageKind: "certificate" | "badge";
+  verifyUrl: string;
+  featured?: boolean;
+};
+
+export type Photo = { src: string; caption?: string };
+
+export type Volunteering = {
+  id: string;
+  org: string;
+  role: string;
+  period: string;
+  summary?: string;
+  highlights: string[];
+  photos: Photo[];
+};
+
 export type Card =
   | ({ type: "about" } & AboutData)
   | { type: "projects"; category: string; projects: ProjectDetail[] }
@@ -46,7 +75,9 @@ export type Card =
   | { type: "skills"; skills: Record<string, string[]> }
   | ({ type: "experience" } & ExperienceData)
   | ({ type: "contact" } & ContactData)
-  | { type: "resume"; url: string; name: string };
+  | { type: "resume"; url: string; name: string }
+  | { type: "certifications"; certifications: Certification[] }
+  | { type: "volunteering"; volunteering: Volunteering[] };
 
 export type StreamEvent =
   | { type: "text"; delta: string }
@@ -82,5 +113,7 @@ export type Profile = {
   skills: Record<string, string[]>;
   achievements: string[];
   leadership: string[];
+  certifications?: Certification[];
+  volunteering?: Volunteering[];
   interests: string[];
 };

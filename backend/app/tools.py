@@ -67,6 +67,22 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
     {
         "type": "function",
         "function": {
+            "name": "show_certifications",
+            "description": "Show certificates and badges (AWS, NPTEL, Coursera, HackerRank) with images and verify links.",
+            "parameters": {"type": "object", "properties": {}, "required": []},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "show_volunteering",
+            "description": "Show volunteering / social work (NSS) with photos.",
+            "parameters": {"type": "object", "properties": {}, "required": []},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "show_contact",
             "description": "Show the contact card (email, LinkedIn, GitHub).",
             "parameters": {"type": "object", "properties": {}, "required": []},
@@ -162,6 +178,17 @@ def run_tool(name: str, raw_args: str | None, profile: dict) -> tuple[dict | Non
         extra = " ".join(profile["achievements"] + profile["leadership"])
         return card, (f"Displayed the experience card. Past internships (completed, not current): {jobs}. "
                       f"Education: {edu}. {extra}")
+
+    if name == "show_certifications":
+        certs = sorted(profile.get("certifications", []), key=lambda c: not c.get("featured", False))
+        facts = "; ".join(f"{c['name']} by {c['issuer']} ({c.get('date', '')})" for c in certs) or "none"
+        return ({"type": "certifications", "certifications": certs},
+                f"Displayed {len(certs)} certifications, each with a verify link. {facts}")
+
+    if name == "show_volunteering":
+        vol = profile.get("volunteering", [])
+        facts = "; ".join(f"{v['role']}, {v['org']}: {' '.join(v.get('highlights', []))}" for v in vol) or "none"
+        return {"type": "volunteering", "volunteering": vol}, f"Displayed the volunteering card. {facts}"
 
     if name == "show_contact":
         c = profile["contact"]

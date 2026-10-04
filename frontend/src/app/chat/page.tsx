@@ -2,7 +2,16 @@ import type { Metadata } from "next";
 import { Chat } from "@/components/Chat";
 import type { Intent } from "@/lib/site";
 
-const INTENTS = ["about", "projects", "skills", "experience", "contact", "resume"];
+const INTENTS = [
+  "about",
+  "projects",
+  "skills",
+  "experience",
+  "contact",
+  "resume",
+  "certifications",
+  "volunteering",
+];
 
 export const metadata: Metadata = { title: "Chat — Suryansh Pandey" };
 

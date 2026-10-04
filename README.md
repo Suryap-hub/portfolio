@@ -131,6 +131,8 @@ Both Render and Vercel watch your GitHub repo. Every time you push to `main`, th
 | What the AI knows (projects, internships, skills) | `backend/data/profile.json` | Commit and push |
 | Landing page text, quick questions, avatar | `frontend/src/lib/site.ts` | Commit and push |
 | Resume or avatar image | Replace the file in `frontend/public/` | Commit and push |
+| A new certificate | Image in `frontend/public/certs/`, then add an entry to `certifications` in `profile.json` | Commit and push |
+| NSS / volunteering photos | Photos in `frontend/public/nss/`, then add them to `volunteering[].photos` in `profile.json` as `{ "src": "/nss/nss-1.webp", "caption": "..." }` | Commit and push |
 | Colours or layout | `frontend/src/...` | Commit and push |
 | Groq key, model, allowed sites | Render → your service → **Environment** | Save; Render redeploys itself |
 | Backend URL the site calls | Vercel → project → **Settings → Environment Variables** | Then **Deployments → Redeploy** |
@@ -157,4 +159,3 @@ Never commit `backend/.env` or `frontend/.env.local`. They're already in `.gitig
 - The rate limiter is in memory, so it only works on a single instance. The fix is to move counters to Redis, as in the FinTech project.
 - Prompt-only grounding reduces made-up answers but can't make them impossible. The cards are always factual because they come from data.
 - No evaluation set yet. Next step: 20 test questions with expected facts, run in CI.
-# portfolio

@@ -15,7 +15,7 @@
     "Java & Spring Boot",
     "FastAPI",
     "AI / RAG",
-    "Distributed systems",
+    "AWS Certified",
     "SRM IST ’27",
     "Basketball"
   ],
@@ -282,6 +282,7 @@
       "Tailwind CSS"
     ],
     "DevOps & Testing": [
+      "AWS",
       "Docker",
       "Docker Compose",
       "GitHub Actions",
@@ -292,6 +293,92 @@
       "Vercel"
     ]
   },
+  "certifications": [
+    {
+      "id": "aws-ccp",
+      "name": "AWS Certified Cloud Practitioner",
+      "issuer": "Amazon Web Services",
+      "kind": "Certification",
+      "date": "Jul 2026",
+      "expires": "Jul 2029",
+      "details": "Foundational AWS certification: cloud concepts, core AWS services, security, pricing and support.",
+      "image": "https://images.credly.com/size/340x340/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png",
+      "thumb": "",
+      "imageKind": "badge",
+      "verifyUrl": "https://www.credly.com/badges/34dd5421-500a-4fe4-8d82-4cfaa78fe87c/public_url",
+      "featured": true
+    },
+    {
+      "id": "nptel-nlp",
+      "name": "Natural Language Processing",
+      "issuer": "NPTEL · IIT Kharagpur",
+      "kind": "Course certificate",
+      "date": "Jan–Apr 2026",
+      "expires": "",
+      "details": "12-week NPTEL online certification course (4 credits recommended). Consolidated score 53% (assignments 18/25, proctored exam 35.25/75).",
+      "image": "/certs/nptel-nlp.webp",
+      "thumb": "/certs/nptel-nlp-thumb.webp",
+      "imageKind": "certificate",
+      "verifyUrl": "https://nptel.ac.in/noc/E_Certificate/NOC26CS45S105510138504967078",
+      "featured": true
+    },
+    {
+      "id": "aws-genai",
+      "name": "AWS Educate: Introduction to Generative AI",
+      "issuer": "Amazon Web Services",
+      "kind": "Training badge",
+      "date": "Jul 2026",
+      "expires": "",
+      "details": "Generative AI concepts, foundation models and use cases, with a post-course assessment.",
+      "image": "https://images.credly.com/size/340x340/images/e50c657a-edd9-4c93-b1cf-2b6634b54abf/blob",
+      "thumb": "",
+      "imageKind": "badge",
+      "verifyUrl": "https://www.credly.com/badges/5de04851-1aa1-4432-b565-5bad9e288053/public_url",
+      "featured": false
+    },
+    {
+      "id": "coursera-ba-process",
+      "name": "Business Analysis & Process Management",
+      "issuer": "Coursera",
+      "kind": "Project certificate",
+      "date": "Aug 2026",
+      "expires": "",
+      "details": "Coursera guided project on business analysis and process management.",
+      "image": "/certs/coursera-ba-process.webp",
+      "thumb": "/certs/coursera-ba-process-thumb.webp",
+      "imageKind": "certificate",
+      "verifyUrl": "https://coursera.org/verify/U0YOLQFN2K2T",
+      "featured": false
+    },
+    {
+      "id": "coursera-ba-spreadsheets",
+      "name": "Introduction to Business Analysis Using Spreadsheets: Basics",
+      "issuer": "Coursera",
+      "kind": "Project certificate",
+      "date": "Aug 2026",
+      "expires": "",
+      "details": "Coursera guided project on business analysis with spreadsheets.",
+      "image": "/certs/coursera-ba-spreadsheets.webp",
+      "thumb": "/certs/coursera-ba-spreadsheets-thumb.webp",
+      "imageKind": "certificate",
+      "verifyUrl": "https://coursera.org/verify/23RABGXOSD8B",
+      "featured": false
+    },
+    {
+      "id": "hackerrank-java",
+      "name": "Java (Basic)",
+      "issuer": "HackerRank",
+      "kind": "Skill certification",
+      "date": "Oct 2024",
+      "expires": "",
+      "details": "Passed HackerRank's Java (Basic) skill certification test.",
+      "image": "/certs/hackerrank-java.webp",
+      "thumb": "/certs/hackerrank-java-thumb.webp",
+      "imageKind": "certificate",
+      "verifyUrl": "https://www.hackerrank.com/certificates/26d2452269c8",
+      "featured": false
+    }
+  ],
   "achievements": [
     "Smart India Hackathon (SIH): team cleared the second round.",
     "Open-source contribution to the Supabase auth repository (issue #46570)."
@@ -300,6 +387,19 @@
     "PR Co-Lead, Computer Society of India (CSI) student chapter.",
     "Management Lead, NSS — led a team of 40+ members.",
     "Vice-Captain, district basketball team."
+  ],
+  "volunteering": [
+    {
+      "id": "nss",
+      "org": "National Service Scheme (NSS)",
+      "role": "Management Lead",
+      "period": "",
+      "summary": "",
+      "highlights": [
+        "Led a team of 40+ members."
+      ],
+      "photos": []
+    }
   ],
   "interests": [
     "Distributed and event-driven systems",

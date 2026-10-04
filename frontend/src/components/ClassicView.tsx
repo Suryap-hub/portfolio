@@ -3,11 +3,13 @@
 import { useEffect, useState } from "react";
 import {
   AboutCard,
+  CertificationsCard,
   ContactCard,
   ExperienceCard,
   ProjectBody,
   ResumeCard,
   SkillsCard,
+  VolunteeringCard,
 } from "@/components/Cards";
 import { InfoButton, SwitchPill } from "@/components/HeaderBits";
 import { fetchProfile } from "@/lib/api";
@@ -89,7 +91,13 @@ export function ClassicView() {
             </section>
 
             <ExperienceCard data={profile} />
+            {profile.certifications && profile.certifications.length > 0 && (
+              <CertificationsCard certifications={profile.certifications} />
+            )}
             <SkillsCard skills={profile.skills} />
+            {profile.volunteering && profile.volunteering.length > 0 && (
+              <VolunteeringCard volunteering={profile.volunteering} />
+            )}
 
             <section className="space-y-4">
               <h2 className="text-[1.65rem] font-bold tracking-tight sm:text-3xl">Get in touch</h2>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Briefcase, ChevronDown, Ellipsis, GraduationCap, Layers, Smile, UserRound } from "lucide-react";
+import { Award, Briefcase, ChevronDown, Ellipsis, GraduationCap, Layers, Smile, UserRound } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { moreQuestions, quickQuestions, type Intent, type QuickKey } from "@/lib/site";
 
@@ -9,13 +9,14 @@ const ICONS: Record<QuickKey, { Icon: typeof Smile; color: string }> = {
   projects: { Icon: Briefcase, color: "text-emerald-600 dark:text-emerald-400" },
   skills: { Icon: Layers, color: "text-violet-500" },
   experience: { Icon: GraduationCap, color: "text-pink-500" },
+  certs: { Icon: Award, color: "text-orange-500" },
   contact: { Icon: UserRound, color: "text-amber-500" },
 };
 
 /** Landing page: square tiles with the icon above the label. */
 export function QuickTiles({ onAsk }: { onAsk: (q: string, intent?: Intent) => void }) {
   return (
-    <ul className="mx-auto grid w-full max-w-[30rem] grid-cols-5 gap-1.5 sm:gap-3">
+    <ul className="mx-auto grid w-full max-w-[22rem] grid-cols-3 gap-2 sm:max-w-[36rem] sm:grid-cols-6 sm:gap-3">
       {quickQuestions.map(({ key, label, question, intent }) => {
         const { Icon, color } = ICONS[key];
         return (

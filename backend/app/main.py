@@ -47,7 +47,9 @@ class ChatMessage(BaseModel):
 class ChatRequest(BaseModel):
     messages: list[ChatMessage] = Field(min_length=1, max_length=50)
     # Set by the quick buttons so the card can be shown without asking the model first.
-    intent: Literal["about", "projects", "skills", "experience", "contact", "resume"] | None = None
+    intent: Literal[
+        "about", "projects", "skills", "experience", "contact", "resume", "certifications", "volunteering"
+    ] | None = None
 
 
 # ---------- dependencies ----------

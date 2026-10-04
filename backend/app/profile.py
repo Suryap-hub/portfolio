@@ -66,6 +66,33 @@ def profile_as_text(profile: dict) -> str:
     for group, items in profile["skills"].items():
         add(f"- {group}: {', '.join(items)}")
 
+    certs = profile.get("certifications", [])
+    if certs:
+        add("CERTIFICATIONS:")
+        for cert in certs:
+            when = cert.get("date", "")
+            if cert.get("expires"):
+                when += f", valid until {cert['expires']}"
+            add(f"- {cert['name']} — {cert['issuer']} ({cert.get('kind', 'certificate')}, {when})")
+            if cert.get("details"):
+                add(f"  {cert['details']}")
+            if cert.get("verifyUrl"):
+                add(f"  verify: {cert['verifyUrl']}")
+
+    vol = profile.get("volunteering", [])
+    if vol:
+        add("VOLUNTEERING / SOCIAL WORK:")
+        for v in vol:
+            period = f" ({v['period']})" if v.get("period") else ""
+            add(f"- {v['role']}, {v['org']}{period}")
+            if v.get("summary"):
+                add(f"  {v['summary']}")
+            for h in v.get("highlights", []):
+                add(f"  * {h}")
+            for photo in v.get("photos", []):
+                if photo.get("caption"):
+                    add(f"  photo: {photo['caption']}")
+
     add("ACHIEVEMENTS:")
     for a in profile["achievements"]:
         add(f"- {a}")

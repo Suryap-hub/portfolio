@@ -29,6 +29,8 @@ INTENT_TOOLS = {
     "experience": "show_experience",
     "contact": "show_contact",
     "resume": "show_resume",
+    "certifications": "show_certifications",
+    "volunteering": "show_volunteering",
 }
 
 

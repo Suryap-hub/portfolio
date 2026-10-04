@@ -2,7 +2,11 @@
 
 import {
   ArrowUpRight,
+  Award,
+  BadgeCheck,
   Brain,
+  HeartHandshake,
+  ZoomIn,
   Check,
   ChevronLeft,
   ChevronRight,
@@ -26,10 +30,13 @@ import { useRef, useState } from "react";
 import type {
   AboutData,
   Card,
+  Certification,
   ContactData,
   ExperienceData,
+  Photo,
   ProjectDetail,
   ProjectSummary,
+  Volunteering,
 } from "@/lib/types";
 import { site } from "@/lib/site";
 import { Avatar } from "./Avatar";
@@ -559,6 +566,228 @@ export function ResumeCard({ url, name }: { url: string; name: string }) {
 }
 
 /* ---------------------------------------------------------------------------
+   Certifications: a grid of certificate thumbnails; click one to see it full
+   size with a "Verify" link to the issuer's own page.
+--------------------------------------------------------------------------- */
+
+function CertImage({ cert, full = false }: { cert: Certification; full?: boolean }) {
+  const src = full ? cert.image : cert.thumb || cert.image;
+  if (cert.imageKind === "badge") {
+    return (
+      <span className="flex h-full w-full items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-sky-50 p-5">
+        <img
+          src={src}
+          alt={`${cert.name} badge`}
+          loading="lazy"
+          referrerPolicy="no-referrer"
+          className={`object-contain drop-shadow-md ${full ? "h-64 w-64" : "h-full max-h-36 w-auto"}`}
+        />
+      </span>
+    );
+  }
+  return (
+    <img
+      src={src}
+      alt={`${cert.name} certificate`}
+      loading="lazy"
+      className={full ? "h-auto max-h-[62dvh] w-full object-contain" : "h-full w-full object-cover object-top"}
+    />
+  );
+}
+
+function VerifyLink({ href, big = false }: { href: string; big?: boolean }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className={`inline-flex items-center gap-1.5 rounded-full font-medium ${
+        big
+          ? "bg-pill px-4 py-2 text-sm text-pill-fg"
+          : "text-xs text-emerald-700 hover:underline dark:text-emerald-400"
+      }`}
+    >
+      <BadgeCheck size={big ? 16 : 14} /> Verify
+      {big && <ArrowUpRight size={15} />}
+    </a>
+  );
+}
+
+export function CertificationsCard({ certifications }: { certifications: Certification[] }) {
+  const [openId, setOpenId] = useState<string | null>(null);
+  const current = certifications.find((c) => c.id === openId);
+
+  return (
+    <section>
+      <SectionTitle>Certifications</SectionTitle>
+      <ul className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
+        {certifications.map((c) => (
+          <li
+            key={c.id}
+            className="flex flex-col overflow-hidden rounded-3xl border border-border bg-surface shadow-soft"
+          >
+            <button
+              type="button"
+              onClick={() => setOpenId(c.id)}
+              aria-label={`View ${c.name}`}
+              className="group relative block aspect-[4/3] w-full overflow-hidden bg-surface-2"
+            >
+              <span className="block h-full w-full transition-transform duration-500 group-hover:scale-[1.04]">
+                <CertImage cert={c} />
+              </span>
+              <span className="absolute right-2 bottom-2 flex h-8 w-8 items-center justify-center rounded-full bg-black/45 text-white opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
+                <ZoomIn size={15} />
+              </span>
+            </button>
+            <div className="flex flex-1 flex-col p-3.5 sm:p-4">
+              <p className="text-[0.7rem] font-semibold tracking-wide text-muted uppercase">{c.kind}</p>
+              <p className="mt-0.5 text-sm leading-snug font-semibold sm:text-[0.95rem]">{c.name}</p>
+              <p className="mt-1 text-xs text-muted">
+                {c.issuer} · {c.date}
+              </p>
+              <div className="mt-auto pt-2.5">
+                <VerifyLink href={c.verifyUrl} />
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <Dialog open={!!current} onClose={() => setOpenId(null)} label={current?.name ?? "Certificate"} wide>
+        {current && (
+          <div>
+            <div className="flex items-center justify-center bg-surface-2">
+              <CertImage cert={current} full />
+            </div>
+            <div className="space-y-3 px-6 py-5">
+              <div>
+                <p className="flex items-center gap-1.5 text-sm font-medium text-muted">
+                  <Award size={15} className="text-amber-500" /> {current.kind}
+                </p>
+                <h3 className="mt-1 text-2xl leading-tight font-bold tracking-tight">{current.name}</h3>
+                <p className="mt-1 text-muted">
+                  {current.issuer} · {current.date}
+                  {current.expires ? ` · valid until ${current.expires}` : ""}
+                </p>
+              </div>
+              {current.details && <p className="text-[0.97rem]">{current.details}</p>}
+              <div className="pt-1">
+                <VerifyLink href={current.verifyUrl} big />
+              </div>
+            </div>
+          </div>
+        )}
+      </Dialog>
+    </section>
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   Volunteering (NSS) with a small photo gallery
+--------------------------------------------------------------------------- */
+
+export function VolunteeringCard({ volunteering }: { volunteering: Volunteering[] }) {
+  const [open, setOpen] = useState<{ photos: Photo[]; index: number } | null>(null);
+  const photo = open ? open.photos[open.index] : null;
+  const step = (dir: 1 | -1) =>
+    setOpen((o) => (o ? { ...o, index: (o.index + dir + o.photos.length) % o.photos.length } : o));
+
+  return (
+    <section>
+      <SectionTitle>Volunteering</SectionTitle>
+      <div className="mt-5 space-y-4">
+        {volunteering.map((v) => (
+          <article key={v.id} className="rounded-3xl border border-border bg-surface p-5 shadow-soft sm:p-6">
+            <div className="flex gap-4">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-rose-500/10">
+                <HeartHandshake size={22} className="text-rose-500" />
+              </span>
+              <div className="min-w-0">
+                <h3 className="text-lg font-semibold">{v.role}</h3>
+                <p className="text-sm text-muted">
+                  {v.org}
+                  {v.period ? ` · ${v.period}` : ""}
+                </p>
+              </div>
+            </div>
+            {v.summary && <p className="mt-4 text-[0.97rem]">{v.summary}</p>}
+            {v.highlights.length > 0 && (
+              <ul className="mt-3 space-y-1.5">
+                {v.highlights.map((h) => (
+                  <li key={h} className="flex gap-2.5 text-[0.95rem]">
+                    <Check size={17} className="mt-[3px] shrink-0 text-emerald-500" />
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {v.photos.length > 0 && (
+              <ul className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                {v.photos.map((p, i) => (
+                  <li key={p.src}>
+                    <button
+                      type="button"
+                      onClick={() => setOpen({ photos: v.photos, index: i })}
+                      aria-label={p.caption ? `View photo: ${p.caption}` : `View photo ${i + 1}`}
+                      className="group block aspect-[4/3] w-full overflow-hidden rounded-2xl bg-surface-2"
+                    >
+                      <img
+                        src={p.src}
+                        alt={p.caption ?? ""}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </article>
+        ))}
+      </div>
+
+      <Dialog open={!!photo} onClose={() => setOpen(null)} label={photo?.caption || "Photo"} wide>
+        {photo && open && (
+          <figure>
+            <div className="relative flex items-center justify-center bg-black">
+              <img src={photo.src} alt={photo.caption ?? ""} className="max-h-[70dvh] w-full object-contain" />
+              {open.photos.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => step(-1)}
+                    aria-label="Previous photo"
+                    className="absolute left-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur hover:bg-black/60"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => step(1)}
+                    aria-label="Next photo"
+                    className="absolute right-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur hover:bg-black/60"
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </>
+              )}
+            </div>
+            <figcaption className="px-6 py-4 text-sm text-muted">
+              {photo.caption}
+              {open.photos.length > 1 && (
+                <span className="float-right">
+                  {open.index + 1} / {open.photos.length}
+                </span>
+              )}
+            </figcaption>
+          </figure>
+        )}
+      </Dialog>
+    </section>
+  );
+}
+
+/* ---------------------------------------------------------------------------
    Dispatcher used by the chat
 --------------------------------------------------------------------------- */
 
@@ -578,6 +807,10 @@ export function CardView({ card, onAsk }: { card: Card; onAsk?: (q: string) => v
       return <ContactCard data={card} />;
     case "resume":
       return <ResumeCard url={card.url} name={card.name} />;
+    case "certifications":
+      return <CertificationsCard certifications={card.certifications} />;
+    case "volunteering":
+      return <VolunteeringCard volunteering={card.volunteering} />;
     default:
       return null;
   }
