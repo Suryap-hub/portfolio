@@ -157,3 +157,4 @@ Never commit `backend/.env` or `frontend/.env.local`. They're already in `.gitig
 - The rate limiter is in memory, so it only works on a single instance. The fix is to move counters to Redis, as in the FinTech project.
 - Prompt-only grounding reduces made-up answers but can't make them impossible. The cards are always factual because they come from data.
 - No evaluation set yet. Next step: 20 test questions with expected facts, run in CI.
+# portfolio
