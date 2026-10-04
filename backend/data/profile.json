@@ -1,0 +1,317 @@
+{
+  "name": "Suryansh Pandey",
+  "nickname": "Surya",
+  "role": "Backend & AI Engineer",
+  "headline": "Backend & AI engineer in the making — I build systems that don't lose your money or your context.",
+  "location": "New Delhi, India",
+  "status": "Final-year B.Tech CSE student (graduating May 2027). Open to SDE, backend and AI engineering roles — full-time from 2027 and final-semester internships.",
+  "bio": [
+    "I'm a Computer Science student at SRM Institute of Science and Technology (Delhi-NCR), graduating in May 2027.",
+    "I like backend systems where correctness matters — concurrency, idempotency, ledgers, event-driven pipelines — and AI applications built on retrieval (RAG).",
+    "My flagship project is a FinTech transaction processing system in Java and Spring Boot. I've also built RAG chatbots, full-stack apps, and contributed to open source.",
+    "Long term, I want to work on hard engineering problems at top tech and quant firms."
+  ],
+  "tags": [
+    "Java & Spring Boot",
+    "FastAPI",
+    "AI / RAG",
+    "Distributed systems",
+    "SRM IST ’27",
+    "Basketball"
+  ],
+  "contact": {
+    "email": "suryanshp991@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/suryansh-pandey-a58313288/",
+    "github": "https://github.com/Suryap-hub",
+    "resume": "/resume.pdf"
+  },
+  "education": [
+    {
+      "school": "SRM Institute of Science and Technology, Delhi-NCR",
+      "degree": "B.Tech, Computer Science and Engineering",
+      "period": "2023 – 2027",
+      "details": ""
+    }
+  ],
+  "experience": [
+    {
+      "company": "DigitalPRO IT Solutions",
+      "role": "AI / GenAI Developer Intern",
+      "period": "Nov 2025 – Jan 2026",
+      "highlights": []
+    },
+    {
+      "company": "Synclovis",
+      "role": "Frontend Engineering Intern",
+      "period": "Jun 2025 – Jul 2025",
+      "highlights": []
+    }
+  ],
+  "projects": [
+    {
+      "id": "fintech",
+      "title": "FinTech Transaction Processing System",
+      "category": "backend",
+      "featured": true,
+      "status": "In progress",
+      "summary": "A production-style banking/payments backend: accounts, deposits, withdrawals and transfers that stay correct under concurrency, retries and crashes.",
+      "stack": [
+        "Java 21",
+        "Spring Boot",
+        "Spring Security",
+        "JWT",
+        "PostgreSQL",
+        "Flyway",
+        "Redis",
+        "Kafka",
+        "Docker",
+        "Testcontainers",
+        "Prometheus",
+        "Grafana"
+      ],
+      "highlights": [
+        "Pessimistic row locks (SELECT ... FOR UPDATE) with lock ordering by account id to prevent double spending and deadlocks.",
+        "Idempotency keys: Redis fast path plus a PostgreSQL UNIQUE constraint as the final guarantee, so retries never move money twice.",
+        "Ledger table with one immutable DEBIT/CREDIT entry per balance change; integration tests check that the ledger always matches balances.",
+        "Kafka events consumed independently by a risk engine, notification service and audit log, with retries and dead-letter topics; every consumer is idempotent.",
+        "Concurrency test: 10 parallel withdrawals of 100 from a balance of 500 give exactly 5 successes and a final balance of 0.",
+        "JWT access tokens + single-use rotating refresh tokens, Redis rate limiting, Prometheus metrics and a Grafana dashboard."
+      ],
+      "limitations": [
+        "Kafka events are published after the DB commit; the production fix is the Transactional Outbox pattern.",
+        "No currency exchange; deposits are simulated; the risk engine is rule-based and only raises alerts."
+      ],
+      "github": "",
+      "live": ""
+    },
+    {
+      "id": "gita-mentor",
+      "title": "Gita Mentor AI",
+      "category": "ai",
+      "featured": true,
+      "status": "In progress",
+      "summary": "A Bhagavad Gita chatbot that answers life questions grounded in the actual verses, using retrieval-augmented generation (RAG).",
+      "stack": [
+        "Next.js",
+        "FastAPI",
+        "Python",
+        "RAG",
+        "FAISS",
+        "sentence-transformers",
+        "Ollama"
+      ],
+      "highlights": [
+        "RAG pipeline: verses embedded with sentence-transformers, searched with FAISS, answered by a local model through Ollama.",
+        "Moved off a hosted LLM API after quota limits, and debugged real-world issues like Python version incompatibilities.",
+        "Planned next: pytest tests with GitHub Actions CI, a 20–30 question evaluation set, and retrieval-threshold and citation-validation guardrails."
+      ],
+      "limitations": [],
+      "github": "https://github.com/Suryap-hub/gita-project",
+      "live": ""
+    },
+    {
+      "id": "linksnap",
+      "title": "LinkSnap — URL Shortener",
+      "category": "fullstack",
+      "featured": false,
+      "status": "Completed",
+      "summary": "A full-stack URL shortener with authentication, caching and a containerised setup.",
+      "stack": [
+        "Java 21",
+        "Spring Boot",
+        "React",
+        "PostgreSQL",
+        "Redis",
+        "JWT",
+        "Docker Compose",
+        "GitHub Actions"
+      ],
+      "highlights": [
+        "Spring Boot API with JWT auth and PostgreSQL storage, Redis for caching.",
+        "Runs with Docker Compose; CI/CD with GitHub Actions; interactive frontend demo."
+      ],
+      "limitations": [],
+      "github": "",
+      "live": ""
+    },
+    {
+      "id": "expense-tracker",
+      "title": "AI Smart Expense Tracker",
+      "category": "ai",
+      "featured": false,
+      "status": "Completed",
+      "summary": "An expense tracker that categorises spending with AI and can scan receipts.",
+      "stack": [
+        "React",
+        "Node.js",
+        "MongoDB Atlas",
+        "Gemini API"
+      ],
+      "highlights": [
+        "AI-based expense categorisation and receipt scanning using the Gemini API.",
+        "Handled real deployment problems: MongoDB Atlas DNS blocking by an ISP, and rotating an API key after it was exposed."
+      ],
+      "limitations": [],
+      "github": "https://github.com/Suryap-hub/Expense-Tracker",
+      "live": ""
+    },
+    {
+      "id": "rag-doc-qa",
+      "title": "RAG Document Q&A",
+      "category": "ai",
+      "featured": false,
+      "status": "Completed",
+      "summary": "Ask questions about your own documents; answers are retrieved from the relevant chunks.",
+      "stack": [
+        "Python",
+        "LangChain",
+        "FAISS",
+        "Flask"
+      ],
+      "highlights": [
+        "Document chunking, embeddings and FAISS vector search behind a Flask API."
+      ],
+      "limitations": [],
+      "github": "",
+      "live": ""
+    },
+    {
+      "id": "client-tracker",
+      "title": "client_tracker",
+      "category": "fullstack",
+      "featured": false,
+      "status": "Live",
+      "summary": "A client-tracking web app running in production.",
+      "stack": [
+        "Node.js",
+        "Express",
+        "Vite",
+        "PostgreSQL (Neon)",
+        "Render",
+        "Vercel"
+      ],
+      "highlights": [
+        "Deployed end to end: backend on Render, frontend on Vercel, database on Neon Postgres."
+      ],
+      "limitations": [],
+      "github": "",
+      "live": ""
+    },
+    {
+      "id": "clinic",
+      "title": "Clinic Management System",
+      "category": "backend",
+      "featured": false,
+      "status": "In progress",
+      "summary": "A multi-doctor clinic system: patients, visits, prescriptions, progress notes and role-based access.",
+      "stack": [
+        "FastAPI",
+        "PostgreSQL",
+        "JWT",
+        "React / Next.js"
+      ],
+      "highlights": [
+        "Data model: one patient has many visits; each visit has a prescription (many medicines) and progress notes.",
+        "Role-based access for admin, doctor and receptionist."
+      ],
+      "limitations": [],
+      "github": "",
+      "live": ""
+    },
+    {
+      "id": "ai-portfolio",
+      "title": "This AI Portfolio",
+      "category": "ai",
+      "featured": false,
+      "status": "Live",
+      "summary": "The site you're on: ask questions and an AI answers about me, showing project, skill and contact cards.",
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "FastAPI",
+        "Groq",
+        "Server-Sent Events"
+      ],
+      "highlights": [
+        "FastAPI backend streams answers over Server-Sent Events and uses LLM tool calls to render cards.",
+        "Per-IP rate limiting, input limits and a grounded system prompt so the AI doesn't invent facts."
+      ],
+      "limitations": [],
+      "github": "",
+      "live": ""
+    }
+  ],
+  "skills": {
+    "Languages": [
+      "Java",
+      "Python",
+      "JavaScript",
+      "TypeScript",
+      "SQL"
+    ],
+    "Backend": [
+      "Spring Boot",
+      "Spring Security",
+      "FastAPI",
+      "Node.js",
+      "Express",
+      "Flask",
+      "REST APIs",
+      "JWT"
+    ],
+    "Data & Messaging": [
+      "PostgreSQL",
+      "MongoDB",
+      "Redis",
+      "Kafka",
+      "Flyway"
+    ],
+    "AI / GenAI": [
+      "RAG",
+      "LangChain",
+      "FAISS",
+      "sentence-transformers",
+      "Ollama",
+      "Gemini API",
+      "Groq"
+    ],
+    "Frontend": [
+      "React",
+      "Next.js",
+      "Tailwind CSS"
+    ],
+    "DevOps & Testing": [
+      "Docker",
+      "Docker Compose",
+      "GitHub Actions",
+      "Testcontainers",
+      "Prometheus",
+      "Grafana",
+      "Render",
+      "Vercel"
+    ]
+  },
+  "achievements": [
+    "Smart India Hackathon (SIH): team cleared the second round.",
+    "Open-source contribution to the Supabase auth repository (issue #46570)."
+  ],
+  "leadership": [
+    "PR Co-Lead, Computer Society of India (CSI) student chapter.",
+    "Management Lead, NSS — led a team of 40+ members.",
+    "Vice-Captain, district basketball team."
+  ],
+  "interests": [
+    "Distributed and event-driven systems",
+    "Retrieval-augmented generation and LLM evaluation",
+    "Probability and quantitative finance",
+    "DSA and competitive programming"
+  ],
+  "suggestedQuestions": [
+    "Who are you?",
+    "What projects have you built?",
+    "What's your tech stack?",
+    "Tell me about your experience",
+    "How can I contact you?"
+  ]
+}

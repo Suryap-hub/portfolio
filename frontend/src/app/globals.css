@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+/* The site is always light (white background). dark: classes only apply under a .dark class. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Design tokens. Light by default (like the reference), with a matching dark
+  theme that follows the visitor's system setting.
+*/
+:root {
+  --bg: #ffffff;
+  --fg: #0a0a0a;
+  --muted: #6b7280;
+  --subtle: #9ca3af;
+  --border: #e7e7ea;
+  --surface: #ffffff;
+  --surface-2: #f2f2f4;
+  --pill: #111111;
+  --pill-fg: #ffffff;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --watermark: #f3f3f4;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px rgb(0 0 0 / 0.06);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-border: var(--border);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-pill: var(--pill);
+  --color-pill-fg: var(--pill-fg);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-watermark: var(--watermark);
+  --shadow-soft: var(--shadow);
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  color-scheme: light;
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01";
+  line-height: 1.55;
+}
+
+:focus-visible:not(input, textarea) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Hide scrollbars on horizontal rails (carousel, chip row) but keep them scrollable. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* AI answer text */
+.answer {
+  font-size: 0.97rem;
+  line-height: 1.75;
+}
+.answer p + p,
+.answer p + ul,
+.answer ul + p,
+.answer p + ol,
+.answer ol + p {
+  margin-top: 0.9em;
+}
+.answer ul {
+  list-style: disc;
+  padding-left: 1.3em;
+}
+.answer ol {
+  list-style: decimal;
+  padding-left: 1.3em;
+}
+.answer li + li {
+  margin-top: 0.35em;
+}
+.answer li::marker {
+  color: var(--subtle);
+}
+.answer strong {
+  font-weight: 650;
+}
+.answer a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.answer code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--surface-2);
+  padding: 0.1em 0.35em;
+  border-radius: 6px;
+}
+
+/* Blinking caret at the end of a streaming answer. */
+.streaming > p:last-child::after,
+.streaming > :is(ul, ol):last-child > li:last-child::after {
+  content: "";
+  display: inline-block;
+  width: 0.45em;
+  height: 1.05em;
+  margin-left: 3px;
+  vertical-align: text-bottom;
+  border-radius: 2px;
+  background: var(--accent);
+  animation: blink 1s steps(2, start) infinite;
+}
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* "Thinking" dots */
+.dots span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 4px;
+  border-radius: 9999px;
+  background: var(--subtle);
+  animation: dot 1.2s ease-in-out infinite;
+}
+.dots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.dots span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+/* Landing page: one staggered entrance */
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.enter {
+  animation: enter 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Avatar gently floats */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* New chat content fades in */
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.appear {
+  animation: appear 380ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.pop {
+  animation: pop 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Avatar bounce when clicked */
+@keyframes wiggle {
+  0% { transform: scale(1) rotate(0); }
+  25% { transform: scale(1.08) rotate(-6deg); }
+  50% { transform: scale(0.96) rotate(5deg); }
+  75% { transform: scale(1.03) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+.wiggle {
+  animation: wiggle 600ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wiggle,
+  .enter,
+  .float,
+  .appear,
+  .pop,
+  .dots span,
+  .streaming > p:last-child::after,
+  .streaming > :is(ul, ol):last-child > li:last-child::after {
+    animation: none;
+  }
+}
