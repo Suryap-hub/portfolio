@@ -75,12 +75,12 @@ Open http://localhost:3000 and ask "What's your best project?"
 
 The AI only says what's in `backend/data/profile.json`, and it says "I don't have that detail" for anything missing. These fields are empty on purpose because I didn't want to invent anything:
 
-- [ ] **Internship highlights** (`experience[].highlights`): add 2–3 real bullets each for DigitalPRO and Synclovis. Right now the AI can only give the role and dates.
+- [x] **Internship highlights** (`experience[].highlights`): add 2–3 real bullets each for DigitalPRO and Synclovis. Right now the AI can only give the role and dates.
 - [ ] **GitHub links** for FinTech, LinkSnap, RAG Q&A, client_tracker and Clinic (`projects[].github`).
 - [ ] **Live demo links** as you deploy each project (`projects[].live`).
 - [ ] **CGPA** in `education[].details`, if you want it shown.
 - [ ] **This portfolio's own GitHub link** (project id `ai-portfolio`).
-- [ ] **Resume:** put your PDF at `frontend/public/resume.pdf`.
+- [x] **Resume:** put your PDF at `frontend/public/resume.pdf`.
 - [ ] **Your avatar (the big face on the landing page):** make your own memoji or cartoon avatar. Some ways:
   - **iPhone:** in Messages, open a chat, tap the Memoji sticker button, create yours, then send it to yourself and save the image.
   - **Android / no iPhone:** make one in an avatar app (for example Bitmoji or your phone's built-in avatar maker), or use a clean cut-out photo.

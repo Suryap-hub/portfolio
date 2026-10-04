@@ -30,7 +30,7 @@
       "school": "SRM Institute of Science and Technology, Delhi-NCR",
       "degree": "B.Tech, Computer Science and Engineering",
       "period": "2023 – 2027",
-      "details": ""
+      "details": "CGPA: 8.2"
     }
   ],
   "experience": [
@@ -38,13 +38,21 @@
       "company": "DigitalPRO IT Solutions",
       "role": "AI / GenAI Developer Intern",
       "period": "Nov 2025 – Jan 2026",
-      "highlights": []
+      "highlights": [
+        "Architected and deployed an end-to-end RAG pipeline for an enterprise AI-based learning and knowledge support system, enabling high-accuracy syllabus and document querying.",
+        "Integrated offline/local LLMs to optimize inference speed and reduce operational infrastructure costs.",
+        "Processed structured and unstructured educational content into vector embeddings for semantic search via vector databases.",
+        "Built RESTful APIs and backend microservices with FastAPI and Python; benchmarked and optimized retrieval accuracy, response latency and generation quality."
+      ]
     },
     {
       "company": "Synclovis",
       "role": "Frontend Engineering Intern",
       "period": "Jun 2025 – Jul 2025",
-      "highlights": []
+      "highlights": [
+        "Engineered 10+ production-ready pages and reusable UI components with Next.js (SSR/SSG) and React.js, improving performance scores and SEO.",
+        "Optimized Core Web Vitals (LCP, CLS, FID) with code splitting, lazy loading and image optimization, reducing average page load time by 40%."
+      ]
     }
   ],
   "projects": [
@@ -380,23 +388,36 @@
     }
   ],
   "achievements": [
+    "Research paper (under review, 2025): An Explainable AI Framework for Crop Failure Identification, using SHAP and LIME for interpretable, model-agnostic explanations.",
     "Smart India Hackathon (SIH): team cleared the second round.",
-    "Open-source contribution to the Supabase auth repository (issue #46570)."
+    "Open-source contribution to Supabase (auth repository, issue #46570)."
   ],
   "leadership": [
-    "PR Co-Lead, Computer Society of India (CSI) student chapter.",
-    "Management Lead, NSS — led a team of 40+ members.",
+    "NSS Management Lead, nameSpace (formerly NSS – SRM Delhi-NCR), Sep 2024 – present.",
+    "PR Co-Lead, CSI Tech Club (2024): promotional campaigns for workshops and hackathons, driving a 30% increase in event registrations.",
     "Vice-Captain, district basketball team."
   ],
   "volunteering": [
     {
       "id": "nss",
-      "org": "National Service Scheme (NSS)",
-      "role": "Management Lead",
+      "org": "nameSpace (formerly NSS – SRM Delhi-NCR)",
+      "role": "NSS Management Lead",
+      "period": "Sep 2024 – Present",
+      "summary": "",
+      "highlights": [
+        "Directed 100+ volunteers across social initiatives and technical events, contributing to a 25% increase in student participation.",
+        "Led and coordinated a core team of 40+ members: planning, delegation and execution of large-scale events."
+      ],
+      "photos": []
+    },
+    {
+      "id": "mayank-foundation",
+      "org": "Mayank Foundation",
+      "role": "Volunteer",
       "period": "",
       "summary": "",
       "highlights": [
-        "Led a team of 40+ members."
+        "Coordinated tree plantation drives and managed on-ground logistics, promoting environmental sustainability and community awareness."
       ],
       "photos": []
     }

@@ -59,7 +59,10 @@ def test_profile_text_contains_key_facts():
     txt = profile_as_text(PROFILE)
     assert "FinTech Transaction Processing System" in txt
     assert "suryanshp991@gmail.com" in txt
-    assert "do not invent" in txt  # internships without details are flagged
+    assert "RAG pipeline" in txt  # internship highlights are included
+    # an internship without details is flagged so the AI doesn't make some up
+    bare = {**PROFILE, "experience": [{**PROFILE["experience"][0], "highlights": []}]}
+    assert "do not invent" in profile_as_text(bare)
 
 
 def test_system_prompt_has_grounding_rules():
